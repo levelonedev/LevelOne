@@ -4,7 +4,7 @@
 /.idea/libraries
 .DS_Store
 .idea/
-
+*.iml
 .class
 build/*
 # Mobile Tools for Java (J2ME)
