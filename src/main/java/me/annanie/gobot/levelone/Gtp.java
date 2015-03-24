@@ -37,13 +37,13 @@ public class Gtp {
                 System.err.println("Illegal value for boardsize command: " + commands);
                 return "ERROR ILLEGAL NUMBER";
             }
-            return "boardsize not implemented yet.";
+            return "";
         });
 
         //CLEARBOARD
         returnMap.put("clear_board", (commands, index) -> {
             bot.clearBoard();
-            return "Clear board not implemented yet.";
+            return "";
         });
 
         //KOMI
@@ -60,14 +60,22 @@ public class Gtp {
 
         //PLAY
         returnMap.put("play", (commands, index) -> {
-
-            return "Play not implemented yet.";
+            char color = Color.parseColor(commands[index+1]);
+            String move = commands[index+2];
+            if(move.equalsIgnoreCase("pass")){
+                return "";
+            }else {
+                Coordinate coord = Coordinate.parseCoord(commands[index + 2]);
+                bot.playMove(color, coord);
+                return "";
+            }
         });
 
         //GENMOVE
         returnMap.put("genmove", (commands, index) -> {
-            bot.genMove();
-            return "A1";
+            char color = Color.parseColor(commands[index+1]);
+            Coordinate coord = bot.genMove(color);
+            return coord.toString();
         });
 
         //FINAL_SCORE
@@ -88,7 +96,6 @@ public class Gtp {
 
         //VERSION
         returnMap.put("list_commands", (commands, index) -> {
-            //returnMap.keySet().stream().forEach(System.out::println);
             return returnMap.keySet().stream().collect(Collectors.joining(" "));
         });
 
