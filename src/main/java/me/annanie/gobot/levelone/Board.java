@@ -8,8 +8,6 @@ public class Board {
     private int size;
     private char [][] boardGrid;
     private static final char EMPTY_CELL = ' ';
-    private static final char WHITE_CELL = 'w';
-    private static final char BLACK_CELL = 'b';
 
 
     public Board() {
@@ -26,6 +24,10 @@ public class Board {
                 boardGrid[i][k] = EMPTY_CELL;
             }
         }
+    }
+
+    public boolean isCellEmpty(Coordinate coord){
+        return boardGrid[coord.getX()][coord.getY()] == EMPTY_CELL;
     }
 
     public void setSize(int size) {

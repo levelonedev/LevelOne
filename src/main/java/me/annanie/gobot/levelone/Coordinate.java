@@ -6,6 +6,8 @@ package me.annanie.gobot.levelone;
 public class Coordinate {
     private int y;
     private int x;
+    public static String rowValues = "ABCDEFGHJKLMNOPQRST";
+
 
     public int getX() {
         return x;
@@ -37,7 +39,7 @@ public class Coordinate {
         int y = 0;
         String upperedMove = move.toUpperCase();
         char xChar = upperedMove.charAt(0);
-        x = xChar -'A';
+        x = rowValues.indexOf(xChar);
         y = Integer.parseInt(move.substring(1)) - 1;
 
         return new Coordinate(x, y);
@@ -47,7 +49,7 @@ public class Coordinate {
     public String toString() {
         StringBuffer coordinate = new StringBuffer();
 
-        coordinate.append((char) (this.x + 'A'));
+        coordinate.append(rowValues.substring(this.x, this.x+1));
         coordinate.append(this.y+1);
         return coordinate.toString();
     }

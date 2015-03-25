@@ -11,7 +11,7 @@ public class LevelOneBot {
     private String name = "LevelOneBot";
     private String version = "v0.0000001";
     private Board board = new Board();
-    Random random = new Random();
+    private Random random = new Random();
 
     public void setBoardSize(Integer boardSize) {
         this.board.setSize(boardSize);
@@ -34,7 +34,12 @@ public class LevelOneBot {
     }
 
     public Coordinate genMove(char color) {
-        return new Coordinate(random.nextInt(getBoardSize()), random.nextInt(getBoardSize()));
+        Coordinate newMove = new Coordinate(random.nextInt(getBoardSize()), random.nextInt(getBoardSize()));
+        while(!board.isCellEmpty(newMove)){
+            newMove = new Coordinate(random.nextInt(getBoardSize()), random.nextInt(getBoardSize()));
+        }
+        board.setCell(color, newMove);
+        return newMove;
     }
 
     public void getScore() {
