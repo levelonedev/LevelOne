@@ -66,7 +66,7 @@ public class Gtp {
                 return "";
             }else {
                 Coordinate coord = Coordinate.parseCoord(commands[index + 2]);
-                bot.playMove(color, coord);
+                bot.playMove(new Move(color, coord));
                 return "";
             }
         });
@@ -74,8 +74,8 @@ public class Gtp {
         //GENMOVE
         returnMap.put("genmove", (commands, index) -> {
             char color = Color.parseColor(commands[index+1]);
-            Coordinate coord = bot.genMove(color);
-            return coord.toString();
+            Move move = bot.genMove(color);
+            return move.getCoordinate().toString();
         });
 
         //FINAL_SCORE

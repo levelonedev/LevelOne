@@ -33,12 +33,15 @@ public class LevelOneBot {
         return komi;
     }
 
-    public Coordinate genMove(char color) {
-        Coordinate newMove = new Coordinate(random.nextInt(getBoardSize()), random.nextInt(getBoardSize()));
-        while(!board.isCellEmpty(newMove)){
-            newMove = new Coordinate(random.nextInt(getBoardSize()), random.nextInt(getBoardSize()));
+    public Move genMove(char color) {
+        Coordinate newCoord = new Coordinate(random.nextInt(getBoardSize()), random.nextInt(getBoardSize()));
+        Move newMove = new Move(color, newCoord);
+        //Shouldn't allocate new everytime
+        while(!board.isMoveLegal(newMove)){
+            newCoord = new Coordinate(random.nextInt(getBoardSize()), random.nextInt(getBoardSize()));
+            newMove = new Move(color, newCoord);
         }
-        board.setCell(color, newMove);
+        board.setCell(newMove);
         return newMove;
     }
 
@@ -63,7 +66,7 @@ public class LevelOneBot {
 
 
 
-    public void playMove(char color, Coordinate coord) {
-        board.setCell(color, coord);
+    public void playMove(Move nextMove) {
+        board.setCell(nextMove);
     }
 }
